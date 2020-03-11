@@ -153,6 +153,7 @@ def cert_request(name, cfg):
 
 	retcode = 0
 	with subprocess.Popen(["/usr/local/lib/acme-tiny/acme_tiny.py",
+					"--verbose",
 					"--directory", cfg["directory"],
 					"cert",
 					"--account-key", cfg["account_key"],
