@@ -153,22 +153,21 @@ def cert_request(name, cfg):
 
 	retcode = 0
 	with subprocess.Popen(["/usr/local/lib/acme-tiny/acme_tiny.py",
-					"--verbose",
-					"--directory", cfg["directory"],
-					"cert",
-					"--account-key", cfg["account_key"],
-					"--config", cfg["config"],
-					"--req", cfg["req"]
-				],
-				stdin=subprocess.DEVNULL,
-				stdout=subprocess.PIPE,
-				stderr=subprocess.PIPE,
-				universal_newlines=True) as proc:
-			with subprocess.Popen(["logger", "-t", name], stdin=proc.stderr, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) as logger:
-				(stdout, stderr) = proc.communicate(timeout=600)
-				retcode = proc.wait(timeout=30)
-				logger.wait(timeout=5)
-				syslog.syslog("{0}: logger={1}, retcode={2}".format(name, logger.pid, retcode))
+				"--verbose",
+				"--syslog", name,
+				"--directory", cfg["directory"],
+				"cert",
+				"--account-key", cfg["account_key"],
+				"--config", cfg["config"],
+				"--req", cfg["req"]
+			],
+			stdin=subprocess.DEVNULL,
+			stdout=subprocess.PIPE,
+			stderr=subprocess.PIPE,
+			universal_newlines=True) as proc:
+		(stdout, stderr) = proc.communicate(timeout=600)
+		retcode = proc.wait(timeout=30)
+		syslog.syslog("{0}: retcode={1}".format(name, retcode))
 
 	if retcode == 0:
 		ee_cert = ""
