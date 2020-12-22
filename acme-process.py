@@ -159,7 +159,8 @@ def cert_request(name, cfg):
 				"cert",
 				"--account-key", cfg["account_key"],
 				"--config", cfg["config"],
-				"--req", cfg["req"]
+				"--req", cfg["req"],
+				"--path", "C = US, O = Internet Security Research Group, CN = ISRG Root X1"
 			],
 			stdin=subprocess.DEVNULL,
 			stdout=subprocess.PIPE,
