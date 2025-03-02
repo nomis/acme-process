@@ -188,7 +188,7 @@ def cert_renewalinfo(name, cfg):
 				else:
 					end = None
 
-		syslog.syslog("{0}: renewal info: {1} {2} {3}".format(name, ari, str(start), str(end)))
+		syslog.syslog("{0}: renewal info: ari=\"{1}\" start=\"{2}\" end=\"{3}\"".format(name, ari, str(start), str(end)))
 		return (ari, start, end)
 	else:
 		print("Error processing {0!r}, acme-tiny returned {1}\n{2}\n{3}".format(name, retcode, stdout, stderr))
