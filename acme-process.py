@@ -220,7 +220,7 @@ def cert_request(name, cfg, ari=""):
 				"--account-key", cfg["account_key"],
 				"--config", cfg["config"],
 				"--req", cfg["req"],
-				"--path", "C = US, O = Internet Security Research Group, CN = ISRG Root X1"
+				"--path", "C = US, O = Internet Security Research Group, CN = ISRG Root X1",
 				"--ari", ari,
 			],
 			stdin=subprocess.DEVNULL,
